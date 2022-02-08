@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, Text, StyleSheet, ScrollView, Image} from'react-native';
+import moment from 'moment-timezone'
 
 import FutureForecast from './FutureForecast'
 
