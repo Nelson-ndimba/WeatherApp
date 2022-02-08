@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image, } from 'react-native';
 import * as Location from 'expo-location';
 import axios from 'axios';
 
@@ -20,25 +20,20 @@ export default function App() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      console.log(location.coords, 'location')
       fetchDataFromApi(location.coords.latitude, location.coords.longitude);
     })();
   }, [])
+
 
   //API Call to fetch Weather Data 
   const fetchDataFromApi = async (latitude, longitude) => {
     if (latitude && longitude) {
       let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`;
-      console.log(url, 'Testing')
-      // axios.get(url).then(res => res.json()).then(data => {
 
-      // // console.log(data)
-      // setData(data)
-      // })
       const response = axios.get(url)
       const responseJson = await response;
       setData(responseJson.data)
-      console.log(responseJson.data, 'JSON')
+    
 
     }
 
@@ -57,6 +52,9 @@ export default function App() {
   )
 };
 
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1.5,
-    resizeMode: "top",
+    resizeMode: "cover",
     justifyContent: "center"
   },
   heading: {

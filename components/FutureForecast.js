@@ -2,9 +2,9 @@ import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native';
 import moment from 'moment-timezone'
 
-//Component to populate fututere weather forecast
+//Component to populate fututer weather forecast
 const FutureForecast = ({ data }) => {
-    console.log(data, 'Future')
+
     return (
         <View style={{ flexDirection: 'row' }}>
             {
@@ -24,15 +24,15 @@ const FutureForecast = ({ data }) => {
     )
 };
 
-const FutureForecastItem = ({forecastItem}) => {
-    // console.log(props, 'Item')
+const FutureForecastItem = ({ forecastItem }) => {
+
     let img = { uri: "http://openweathermap.org/img/wn/" + forecastItem.weather[0].icon + "@2x.png" }
     return (
         <View style={styles.futureItemContainer}>
             <Text style={styles.day} >{moment(forecastItem.dt * 1000).format('ddd')}</Text>
             <Image source={img} style={styles.image} />
-            <Text style={styles.temp}>Night - {forecastItem.temp.night}&#176;</Text>
             <Text style={styles.temp}>Day - {forecastItem.temp.day}&#176;</Text>
+            <Text style={styles.temp}>Night - {forecastItem.temp.night}&#176;</Text>
         </View>
 
     )
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     futureItemContainer: {
         justifyContent: "center",
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: 'grey',
         borderRadius: 10,
         borderColor: '#eee',
         borderWidth: 1,
@@ -70,8 +70,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderRadius: 50,
         fontWeight: "200",
-        marginBottom: 15,
-        marginRight: 20
+        marginBottom: 5,
+        marginRight: 20,
+        marginTop: 5
     },
     temp: {
         fontSize: 16,

@@ -25,6 +25,10 @@
         "backgroundColor": "#FFFFFF"
       }
     },
+    "android": {
+      "package": "com.nelsonndimba.appweather",
+      "versionCode": 1
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }
