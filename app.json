@@ -27,7 +27,8 @@
     },
     "android": {
       "package": "com.nelsonndimba.appweather",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions":["LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
