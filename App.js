@@ -1,53 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
 import {React, useEffect, useState} from 'react'
 import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import * as Location from 'expo-location';
 
 import DateTime from './components/DateTime'
-import WeatherScroll from './components/WeatherScroll'
-
-
-let img = require('./assets/forest_sunny.png')
 const API_KEY ='bc4fb8665c4eee8978ea2b0725f9f363';
-
+import WeatherScroll from './components/WeatherScroll'
+let img = require('./assets/forest_sunny.png')
 
 export default function App() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((success) => {
-        
-      let {latitude, longitude } = success.coords;
-      fetchDataFromApi(latitude, longitude)
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync(); // Location permission function for devices
+      if (status !== 'granted') {
+        fetchDataFromApi("40.7128", "-74.0060")
+        return;
+      }
 
-  }, (err) => {
-    if(err){
-      fetchDataFromApi("29.0852° ", "26.1596° ")
-
-    }
-
-  })
+      let location = await Location.getCurrentPositionAsync({});
+      fetchDataFromApi(location.coords.latitude, location.coords.longitude);
+    })();
   }, [])
 
+  //API Call to fetch Weather Data 
   const fetchDataFromApi = (latitude, longitude) => {
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=
-      ${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&
-      appid=${API_KEY}`).then(res => res.json()).then(data => {
+    if(latitude && longitude) {
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=
+      ${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=
+      ${API_KEY}`).then(res => res.json()).then(data => {
 
-      console.log(data)
+      // console.log(data)
       setData(data)
-    
       })
+    }
+    
   }
 
   return (
-    
     <View style={styles.container}>
       <ImageBackground source={img } style={styles.image}>
-        <DateTime /> 
+        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon} /> 
       </ImageBackground>
 
       <View style={{flex:1, backgroundColor:"#47AB2F"}}>
-      <WeatherScroll />
+      <WeatherScroll weatherData={data.daily} />
       </View>
     </View>
   )

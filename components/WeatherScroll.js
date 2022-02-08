@@ -13,7 +13,7 @@ const WeatherScroll = ({weatherData}) => {
     )
 };
 
-
+//Component to showacse the current day weather data
 const CurrentTemp1 = ({data}) => {
     if(data && data.weather){
         const img = {uri: 'http://openweathermap.org/img/wn/'+ data.weather[0].icon +'@4x.png'}

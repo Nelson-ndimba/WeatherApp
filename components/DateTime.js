@@ -3,8 +3,10 @@ import {View, Text, StyleSheet} from'react-native';
 import moment from 'moment-timezone'
 
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                'Thursday', 'Friday', 'Saturday']
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const WeatherItem = ({title, value, unit}) => {
     return(
@@ -30,7 +32,8 @@ const DateTime = ({current, lat, lon, timezone}) => {
             const minutes = time.getMinutes();
             const ampm = hour >=12 ? 'pm' : 'am'
         
-            setTime((hoursIn12HrFormat < 10? '0'+hoursIn12HrFormat : hoursIn12HrFormat) + ':' + (minutes < 10? '0'+minutes: minutes) +ampm) 
+            setTime((hoursIn12HrFormat < 10? '0'+hoursIn12HrFormat : hoursIn12HrFormat) + 
+            ':' + (minutes < 10? '0'+minutes: minutes) +ampm) 
         
             setDate(days[day] + ', ' + date+ ' ' + months[month]) 
         
